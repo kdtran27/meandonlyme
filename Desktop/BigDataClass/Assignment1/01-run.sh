@@ -1,5 +1,7 @@
 #This is the number of genes in yeast.
 
+#this is not the place for an essay
+
 # This script is looking at the saccharomyces file provided. The if statement of the script is looking for specifics. It wants to know if the number of arguments is equal to 0. The number of arguments in this particular case is the number of files provided. If the number of arguments does equal 0, then print the echo command to the terminal. However, when the script is ran, the echo command of the if statement is not read to the terminal. Instead the number of arguments is actually 1, the number of files present. So the if command is not executed and exited. 
 # After the if statement, the following commands are not bracketed so they get run even though the if statement failed. The echo command is read to the terminal by the commands that follow it in that order by a pipe character to show the order of which the commands should be read.
 # For the saccharomyces file, select lines that do not match any of the specified patterns, specifically beginning with #.
