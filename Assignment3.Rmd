@@ -1,13 +1,10 @@
 ---
 title: "Assignment3"
-author: "Kathleen Tran"
+author: "Kathleen Tran/Eric Almeida"
 date: "3/6/2017"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## R Markdown
 
@@ -15,16 +12,40 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
 
 ## Including Plots
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(curl)
+library(plyr)
+library(dplyr)
+
+gapminder_location<-curl(url = "https://raw.githubusercontent.com/resbaz/r-novice-gapminder-files/master/data/gapminder-FiveYearData.csv")
+gapminder<-read.csv(gapminder_location)
+
+ggplot(subset(gapminder, continent %in% c("Asia", "Africa")),
+       aes(x=lifeExp,
+           y=gdpPercap,
+           color=continent))+geom_point()+geom_smooth()+ggtitle("Looking at Life Expectancy via GDP per Capita in Asia and Africa")
+
+ggplot(subset(gapminder, continent %in% c("Americas", "Europe")),
+       aes(x=lifeExp,
+           y=gdpPercap,
+           color=continent))+geom_point()+ggtitle("Looking at Life Expectancy via GDP per Capita in the 
+          Americas and Europe")
+
+ggplot(subset(gapminder, continent %in% c("Oceania", "Asia")),
+       aes(x=lifeExp,
+           y=gdpPercap,
+           color=continent))+geom_point()+ggtitle("Looking at Life Expectancy via GDP per Capita in Oceania and Asia")
+
+ggplot(gapminder, aes(x=pop, y=gdpPercap))+geom_bar(stat="identity")
+
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
